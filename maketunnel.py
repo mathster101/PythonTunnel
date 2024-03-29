@@ -4,6 +4,7 @@ import select
 import Neo
 
 def openTun(tunName):
+    #huge thanks to https://jvns.ca/blog/2022/09/06/send-network-packets-python-tun-tap/
     tun = open("/dev/net/tun", "r+b", buffering=0)
     LINUX_IFF_TUN = 0x0001
     LINUX_IFF_NO_PI = 0x1000
@@ -45,10 +46,10 @@ while True:
     for fd in inputs:
         if fd == tun:
             data = tun.read(2000)
-            print(data, "from tun")
+            print(len(data), "from tun")
             tcp.send_data(data)
             print("sent")
         if fd == tcp.sock:
             data = tcp.receive_data()
-            print(data, "from tcp")
+            print(len(data), "from tcp")
             tun.write(data)
