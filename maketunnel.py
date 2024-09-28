@@ -45,7 +45,6 @@ else:
 print("sockets are up")
 
 while True:
-    fileDescriptorsToMonitor = [tun, tcp.sock, tcp.conn]
     outputs = []
     inputs,outputs,errs = select.select(fileDescriptorsToMonitor, outputs, fileDescriptorsToMonitor)
     for fd in inputs:
