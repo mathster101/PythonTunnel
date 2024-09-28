@@ -5,7 +5,7 @@ import Neo
 
 #########################################
 ttype = "client"# i change this to client on host B
-CLIENT_IP = "192.168.0.47"# only for client side
+CLIENT_IP = "10.1.1.119"# only for client side
 #########################################
 
 def openTun(tunName):
@@ -32,16 +32,22 @@ def clientUp():
 #####################################################
 
 tun = openTun(b"tun0")
+tcp = None
+fileDescriptorsToMonitor = []
+
 if ttype == "server":
     tcp = serverUp()
+    fileDescriptorsToMonitor = [tun,tcp.conn]
 else:
     tcp = clientUp()
+    fileDescriptorsToMonitor = [tun, tcp.sock]
+    
 print("sockets are up")
 
 while True:
-    inputs = [tun, tcp.sock, tcp.conn]
+    fileDescriptorsToMonitor = [tun, tcp.sock, tcp.conn]
     outputs = []
-    inputs,outputs,errs = select.select(inputs, outputs, inputs)
+    inputs,outputs,errs = select.select(fileDescriptorsToMonitor, outputs, fileDescriptorsToMonitor)
     for fd in inputs:
         if fd == tun:
             data = tun.read(2000)
