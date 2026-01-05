@@ -22,7 +22,7 @@ A Python script to create and manage TUN tunnel devices for secure network commu
 pip install pyroute2
 ```
 
-Note: The `Neo` module must be available in your Python path.
+Note: The `Neo` module must be available in your Python path -- https://github.com/mathster101/Neo.git
 
 ## Usage
 
