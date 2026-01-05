@@ -32,6 +32,7 @@ def createTunDevice(name = 'tun0', owner_uid = None):
 def deleteTunIfExists():
     try:
         idx = ip.link_lookup(ifname = 'tun0')[0]
+        ip.link("del", index=idx)
     except IndexError:
         pass # Interface does not exist   
 
