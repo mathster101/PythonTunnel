@@ -22,7 +22,7 @@ A Python script to create and manage TUN tunnel devices for secure network commu
 pip install pyroute2
 ```
 
-Note: The `Neo` module must be available in your Python path.
+Note: The `Neo` module must be available in your Python path -- https://github.com/mathster101/Neo.git
 
 ## Usage
 
@@ -85,7 +85,7 @@ ping 10.0.0.1
 
 ## Notes
 
-- Must be run with sufficient privileges to create TUN devices (typically root)
+- Must be run with sufficient privileges to create TUN devices (root)
 - The `Neo` module handles the underlying communication protocol
 - Default subnet mask is /24 (255.255.255.0)
 - Use Ctrl+C to gracefully shut down the tunnel
